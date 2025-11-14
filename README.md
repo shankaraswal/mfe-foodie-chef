@@ -52,11 +52,33 @@ Ensure the following are installed on your system:
 
 ### Running the Application
 
+#### Option 1: Using Docker (Recommended)
+
+```bash
+# Build and start all services
+make build
+make up
+
+# View logs
+make logs
+
+# Stop all services
+make down
+```
+
+All services will be available at:
+- Host App: http://localhost:8080
+- Chef MFE: http://localhost:8081
+- Customer MFE: http://localhost:8082
+- Booking MFE: http://localhost:8083
+
+For all Docker commands, see [DOCKER_README.md](./DOCKER_README.md) or run `make help`.
+
+#### Option 2: Running Locally
+
 Each micro-frontend and host application must be run in separate terminals.
 
 1.  **Run `host-app`:**
-
-    Open a terminal, navigate to the `host-app` directory, and start the development server:
 
     ```bash
     cd packages/host-app
@@ -67,8 +89,6 @@ Each micro-frontend and host application must be run in separate terminals.
 
 2.  **Run `chef-mfe`:**
 
-    Open a new terminal, navigate to the `chef-mfe` directory, and start the development server:
-
     ```bash
     cd packages/chef-mfe
     pnpm start
@@ -77,8 +97,6 @@ Each micro-frontend and host application must be run in separate terminals.
     This will start the MFE at `http://localhost:8081`.
 
 3.  **Run `customer-mfe`:**
-
-    Open a new terminal, navigate to the `customer-mfe` directory, and start the development server:
 
     ```bash
     cd packages/customer-mfe
@@ -89,8 +107,6 @@ Each micro-frontend and host application must be run in separate terminals.
 
 4.  **Run `booking-mfe`:**
 
-    Open a new terminal, navigate to the `booking-mfe` directory, and start the development server:
-
     ```bash
     cd packages/booking-mfe
     pnpm start
@@ -98,7 +114,7 @@ Each micro-frontend and host application must be run in separate terminals.
 
     This will start the MFE at `http://localhost:8083`.
 
-    Once all applications are running, you can access the `host-app` at `http://localhost:8080`. The host application will dynamically load the micro-frontends.
+Once all applications are running, you can access the `host-app` at `http://localhost:8080`. The host application will dynamically load the micro-frontends.
 
 ## Code Organization
 

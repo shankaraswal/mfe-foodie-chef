@@ -7,7 +7,11 @@ module.exports = {
   mode: 'development',
   devServer: {
     port: 8080,
+    host: '0.0.0.0',
     historyApiFallback: true,
+    hot: true,
+    liveReload: true,
+    watchFiles: ['src/**/*'],
   },
   output: {
     publicPath: 'auto',

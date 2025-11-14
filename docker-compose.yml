@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  chef-mfe:
+    build:
+      context: .
+      dockerfile: packages/chef-mfe/Dockerfile
+    container_name: chef-mfe
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./packages/chef-mfe/src:/app/packages/chef-mfe/src
+      - ./packages/chef-mfe/public:/app/packages/chef-mfe/public
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - mfe-network
+
+  customer-mfe:
+    build:
+      context: .
+      dockerfile: packages/customer-mfe/Dockerfile
+    container_name: customer-mfe
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./packages/customer-mfe/src:/app/packages/customer-mfe/src
+      - ./packages/customer-mfe/public:/app/packages/customer-mfe/public
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - mfe-network
+
+  booking-mfe:
+    build:
+      context: .
+      dockerfile: packages/booking-mfe/Dockerfile
+    container_name: booking-mfe
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./packages/booking-mfe/src:/app/packages/booking-mfe/src
+      - ./packages/booking-mfe/public:/app/packages/booking-mfe/public
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - mfe-network
+
+  host-app:
+    build:
+      context: .
+      dockerfile: packages/host-app/Dockerfile
+    container_name: host-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./packages/host-app/src:/app/packages/host-app/src
+      - ./packages/host-app/public:/app/packages/host-app/public
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - chef-mfe
+      - customer-mfe
+      - booking-mfe
+    networks:
+      - mfe-network
+
+networks:
+  mfe-network:
+    driver: bridge

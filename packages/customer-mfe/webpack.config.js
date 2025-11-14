@@ -8,10 +8,14 @@ module.exports = {
   mode: 'development',
   devServer: {
     port: 8082,
+    host: '0.0.0.0',
     historyApiFallback: true,
-    open: false, // ← Browser mat kholo
+    open: false,
+    hot: true,
+    liveReload: true,
+    watchFiles: ['src/**/*'],
     headers: {
-      'Access-Control-Allow-Origin': '*', // ← CORS safe
+      'Access-Control-Allow-Origin': '*',
     },
   },
   output: {
